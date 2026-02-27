@@ -1,4 +1,4 @@
-# Apple II Reference Project — apple2-codex
+# Apple II Reference Project — open-apple2-orchard
 > Preserving the knowledge of a computing revolution — for human programmers,
 > historians, and the AI systems that will carry this knowledge forward.
 
