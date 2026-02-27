@@ -1,0 +1,1635 @@
+{
+  "apple_ii_reference": {
+    "zero_page": {
+      "description": "The zero page is the first 256 bytes of memory (addresses $00 to $FF) in an Apple II computer. It is used by the system and BASIC interpreters to store important variables, pointers, and flags that control various aspects of the computer's operation.",
+      "memory_locations": [
+        {
+          "address": {
+            "hex_start": "$0",
+            "hex_end": "$5",
+            "decimal_start": 0,
+            "decimal_end": 5
+          },
+          "basic_variant": "applesoft",
+          "description": "Jump instructions"
+        },
+        {
+          "address": {
+            "hex_start": "$6",
+            "hex_end": "$9",
+            "decimal_start": 6,
+            "decimal_end": 9
+          },
+          "basic_variant": "applesoft",
+          "description": "Not used"
+        },
+        {
+          "address": {
+            "hex_start": "$0A",
+            "hex_end": "$0C",
+            "decimal_start": 10,
+            "decimal_end": 12
+          },
+          "basic_variant": "applesoft",
+          "description": "USR jump instruction"
+        },
+        {
+          "address": {
+            "hex_start": "$0D",
+            "hex_end": "$17",
+            "decimal_start": 13,
+            "decimal_end": 23
+          },
+          "basic_variant": "applesoft",
+          "description": "Flags and counters"
+        },
+        {
+          "address": {
+            "hex_start": "$18",
+            "decimal_start": 24
+          },
+          "basic_variant": "both",
+          "description": "First track of DOS data"
+        },
+        {
+          "address": {
+            "hex_start": "$19",
+            "decimal_start": 25
+          },
+          "basic_variant": "both",
+          "description": "First sector of DOS data"
+        },
+        {
+          "address": {
+            "hex_start": "$1A",
+            "decimal_start": 26
+          },
+          "basic_variant": "both",
+          "description": "Number of DOS sectors to load"
+        },
+        {
+          "address": {
+            "hex_start": "$1B",
+            "decimal_start": 27
+          },
+          "basic_variant": "both",
+          "description": "High byte of DOS buffer (low byte is always 00)"
+        },
+        {
+          "address": {
+            "hex_start": "$1A",
+            "hex_end": "$1B",
+            "decimal_start": 26,
+            "decimal_end": 27
+          },
+          "basic_variant": "both",
+          "description": "DRAW and XDRAW shape pointer"
+        },
+        {
+          "address": {
+            "hex_start": "$1C",
+            "decimal_start": 28
+          },
+          "basic_variant": "both",
+          "description": "Last color used"
+        },
+        {
+          "address": {
+            "hex_start": "$1D",
+            "hex_end": "$1F",
+            "decimal_start": 29,
+            "decimal_end": 31
+          },
+          "basic_variant": "both",
+          "description": "Not used"
+        },
+        {
+          "address": {
+            "hex_start": "$20",
+            "decimal_start": 32
+          },
+          "basic_variant": "both",
+          "description": "Text window left edge",
+          "usage": {
+            "code_snippet": "POKE 32,N",
+            "explanation": "N is 0-39; norm is 0",
+            "notes": "Entering TEXT restores normal text window"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$21",
+            "decimal_start": 33
+          },
+          "basic_variant": "both",
+          "description": "Text window right edge",
+          "usage": {
+            "code_snippet": "POKE 33,N",
+            "explanation": "N is 1-40 or 1-80; norm is 40 (40-column mode) or 80 (80-column mode)",
+            "notes": "Entering TEXT restores normal text window"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$22",
+            "decimal_start": 34
+          },
+          "basic_variant": "both",
+          "description": "Text window top edge",
+          "usage": {
+            "code_snippet": "POKE 34,N",
+            "explanation": "N is 0-23; norm is 0",
+            "notes": "Entering TEXT restores normal text window"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$23",
+            "decimal_start": 35
+          },
+          "basic_variant": "both",
+          "description": "Text window bottom edge",
+          "usage": {
+            "code_snippet": "POKE 35,N",
+            "explanation": "N is 1-24; norm is 24",
+            "notes": "Entering TEXT restores normal text window"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$24",
+            "decimal_start": 36
+          },
+          "basic_variant": "both",
+          "description": "Cursor's column position minus 1 (HTAB's place)",
+          "usage": {
+            "code_snippet": "POKE 36,C",
+            "explanation": "C is 1-40 or 1-80",
+            "notes": "Plots cursor position"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$25",
+            "decimal_start": 37
+          },
+          "basic_variant": "both",
+          "description": "Cursor's row location minus 1 (VTAB's place)",
+          "usage": {
+            "code_snippet": "POKE 37,R",
+            "explanation": "R is 1-24",
+            "notes": "Plots cursor position"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$26",
+            "hex_end": "$27",
+            "decimal_start": 38,
+            "decimal_end": 39
+          },
+          "basic_variant": "both",
+          "description": "Address of current low-res cursor row",
+          "usage": {
+            "code_snippet": "?PEEK(38)+PEEK(39)*256"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$28",
+            "hex_end": "$29",
+            "decimal_start": 40,
+            "decimal_end": 41
+          },
+          "basic_variant": "both",
+          "description": "Address of current text cursor row",
+          "usage": {
+            "code_snippet": "?PEEK(40)+PEEK(41)*256"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$2A",
+            "hex_end": "$2B",
+            "decimal_start": 42,
+            "decimal_end": 43
+          },
+          "basic_variant": "both",
+          "description": "Row pointer for text scrolling"
+        },
+        {
+          "address": {
+            "hex_start": "$2B",
+            "decimal_start": 43
+          },
+          "basic_variant": "both",
+          "description": "Last booted slot number * 16"
+        },
+        {
+          "address": {
+            "hex_start": "$2C",
+            "decimal_start": 44
+          },
+          "basic_variant": "both",
+          "description": "Last lo-res HLIN right endpoint",
+          "usage": {
+            "code_snippet": "?PEEK(44)"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$2D",
+            "decimal_start": 45
+          },
+          "basic_variant": "both",
+          "description": "Last lo-res VLIN bottom endpoint",
+          "usage": {
+            "code_snippet": "?PEEK(45)"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$2E",
+            "decimal_start": 46
+          },
+          "basic_variant": "both",
+          "usage": {
+            "code_snippet": "N=PEEK(46)",
+            "explanation": "If N=15 ($0F) then a lo-res color block is to be plotted in the lower half of the screen; if N=240 ($F0) then it will be plotted in the upper half"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$2F",
+            "decimal_start": 47
+          },
+          "basic_variant": "both",
+          "description": "Sometimes DOS volume number"
+        },
+        {
+          "address": {
+            "hex_start": "$30",
+            "decimal_start": 48
+          },
+          "basic_variant": "both",
+          "description": "Lo-res color * 17"
+        },
+        {
+          "address": {
+            "hex_start": "$32",
+            "decimal_start": 50
+          },
+          "basic_variant": "both",
+          "usage": [
+            {
+              "code_snippet": "N=PEEK(50)",
+              "explanation": "In N=PEEK(50), the current text format is INVERSE if N=63 ($3F); FLASH if N=127 ($7F); and NORMAL if N=255 ($FF)"
+            },
+            {
+              "code_snippet": "POKE 50,128",
+              "explanation": "make listing and CATALOG invisible"
+            }
+          ]
+        },
+        {
+          "address": {
+            "hex_start": "$33",
+            "decimal_start": 51
+          },
+          "basic_variant": "both",
+          "description": "ASCII character for INPUT prompt symbol",
+          "usage": {
+            "code_snippet": "POKE 51",
+            "explanation": "Sometimes defeats 'Not Direct Command' error"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$34",
+            "hex_end": "$49",
+            "decimal_start": 52,
+            "decimal_end": 73
+          },
+          "basic_variant": "both",
+          "description": "Monitor and DOS registers"
+        },
+        {
+          "address": {
+            "hex_start": "$48",
+            "decimal_start": 72
+          },
+          "basic_variant": "both",
+          "usage": {
+            "code_snippet": "POKE 72",
+            "explanation": "Resets the status register"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$4A",
+            "hex_end": "$4B",
+            "decimal_start": 74,
+            "decimal_end": 75
+          },
+          "basic_variant": "integer",
+          "description": "LOMEM"
+        },
+        {
+          "address": {
+            "hex_start": "$4C",
+            "hex_end": "$4D",
+            "decimal_start": 76,
+            "decimal_end": 77
+          },
+          "basic_variant": "integer",
+          "description": "HIMEM"
+        },
+        {
+          "address": {
+            "hex_start": "$4E",
+            "hex_end": "$4F",
+            "decimal_start": 78,
+            "decimal_end": 79
+          },
+          "basic_variant": "both",
+          "description": "Random number field",
+          "usage": {
+            "code_snippet": "RND(PEEK(78)+PEEK(79)*256)",
+            "explanation": "Better random number generator"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$50",
+            "hex_end": "$61",
+            "decimal_start": 80,
+            "decimal_end": 97
+          },
+          "basic_variant": "applesoft",
+          "description": "Pointers"
+        },
+        {
+          "address": {
+            "hex_start": "$52",
+            "decimal_start": 82
+          },
+          "basic_variant": "applesoft",
+          "usage": {
+            "code_snippet": "POKE 82,128",
+            "explanation": "Makes any command RUN"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$62",
+            "hex_end": "$66",
+            "decimal_start": 98,
+            "decimal_end": 102
+          },
+          "basic_variant": "both",
+          "description": "Result of last-floating point multiplication or division operation"
+        },
+        {
+          "address": {
+            "hex_start": "$67",
+            "hex_end": "$68",
+            "decimal_start": 103,
+            "decimal_end": 104
+          },
+          "basic_variant": "both",
+          "description": "Start of BASIC program"
+        },
+        {
+          "address": {
+            "hex_start": "$69",
+            "hex_end": "$6A",
+            "decimal_start": 105,
+            "decimal_end": 106
+          },
+          "basic_variant": "both",
+          "description": "LOMEM; end of BASIC program and start of variable space"
+        },
+        {
+          "address": {
+            "hex_start": "$6B",
+            "hex_end": "$6C",
+            "decimal_start": 107,
+            "decimal_end": 108
+          },
+          "basic_variant": "both",
+          "description": "Start of defined array space"
+        },
+        {
+          "address": {
+            "hex_start": "$6D",
+            "hex_end": "$6E",
+            "decimal_start": 109,
+            "decimal_end": 110
+          },
+          "basic_variant": "both",
+          "description": "End of defined array space"
+        },
+        {
+          "address": {
+            "hex_start": "$6F",
+            "hex_end": "$70",
+            "decimal_start": 111,
+            "decimal_end": 112
+          },
+          "basic_variant": "both",
+          "description": "Start of string storage"
+        },
+        {
+          "address": {
+            "hex_start": "$71",
+            "hex_end": "$72",
+            "decimal_start": 113,
+            "decimal_end": 114
+          },
+          "basic_variant": "applesoft",
+          "description": "Temporary register"
+        },
+        {
+          "address": {
+            "hex_start": "$73",
+            "hex_end": "$74",
+            "decimal_start": 115,
+            "decimal_end": 116
+          },
+          "basic_variant": "applesoft",
+          "description": "HIMEM - 1; highest address available to BASIC program"
+        },
+        {
+          "address": {
+            "hex_start": "$75",
+            "hex_end": "$76",
+            "decimal_start": 117,
+            "decimal_end": 118
+          },
+          "basic_variant": "both",
+          "description": "Line number being executed"
+        },
+        {
+          "address": {
+            "hex_start": "$77",
+            "hex_end": "$78",
+            "decimal_start": 119,
+            "decimal_end": 120
+          },
+          "basic_variant": "both",
+          "description": "Line number where program stopped"
+        },
+        {
+          "address": {
+            "hex_start": "$79",
+            "hex_end": "$7A",
+            "decimal_start": 121,
+            "decimal_end": 122
+          },
+          "basic_variant": "both",
+          "description": "Address of next statemenent to be executed"
+        },
+        {
+          "address": {
+            "hex_start": "$7B",
+            "hex_end": "$7C",
+            "decimal_start": 123,
+            "decimal_end": 124
+          },
+          "basic_variant": "both",
+          "description": "Next DATA line number"
+        },
+        {
+          "address": {
+            "hex_start": "$7D",
+            "hex_end": "$7E",
+            "decimal_start": 125,
+            "decimal_end": 126
+          },
+          "basic_variant": "both",
+          "description": "Next DATA address"
+        },
+        {
+          "address": {
+            "hex_start": "$7F",
+            "hex_end": "$80",
+            "decimal_start": 127,
+            "decimal_end": 128
+          },
+          "basic_variant": "both",
+          "description": "INPUT source pointer"
+        },
+        {
+          "address": {
+            "hex_start": "$81",
+            "hex_end": "$82",
+            "decimal_start": 129,
+            "decimal_end": 130
+          },
+          "basic_variant": "both",
+          "description": "Last used variable's name",
+          "usage": {
+            "code_snippet": "?CHR$(PEEK(129))+CHR$(PEEK(130))"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$83",
+            "hex_end": "$84",
+            "decimal_start": 131,
+            "decimal_end": 132
+          },
+          "basic_variant": "both",
+          "description": "Last used variable's address",
+          "usage": {
+            "code_snippet": "?PEEK(131)+PEEK(132)*256"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$85",
+            "hex_end": "$9C",
+            "decimal_start": 133,
+            "decimal_end": 156
+          },
+          "basic_variant": "applesoft",
+          "description": "General-purpose registers"
+        },
+        {
+          "address": {
+            "hex_start": "$9D",
+            "hex_end": "$A3",
+            "decimal_start": 157,
+            "decimal_end": 163
+          },
+          "basic_variant": "both",
+          "description": "Main floating-point arithmetic accumulator"
+        },
+        {
+          "address": {
+            "hex_start": "$A5",
+            "hex_end": "$AB",
+            "decimal_start": 165,
+            "decimal_end": 171
+          },
+          "basic_variant": "both",
+          "description": "Axilary floating-point arithmetic accumulator"
+        },
+        {
+          "address": {
+            "hex_start": "$AC",
+            "hex_end": "$AE",
+            "decimal_start": 172,
+            "decimal_end": 174
+          },
+          "basic_variant": "applesoft",
+          "description": "General-purpose registers"
+        },
+        {
+          "address": {
+            "hex_start": "$AF",
+            "hex_end": "$B0",
+            "decimal_start": 175,
+            "decimal_end": 176
+          },
+          "basic_variant": "both",
+          "description": "End of BASIC program"
+        },
+        {
+          "address": {
+            "hex_start": "$B1",
+            "hex_end": "$C8",
+            "decimal_start": 177,
+            "decimal_end": 200
+          },
+          "basic_variant": "applesoft",
+          "description": "Get character routine"
+        },
+        {
+          "address": {
+            "hex_start": "$C9",
+            "hex_end": "$CD",
+            "decimal_start": 201,
+            "decimal_end": 205
+          },
+          "basic_variant": "both",
+          "description": "Floating point random number"
+        },
+        {
+          "address": {
+            "hex_start": "$CE",
+            "hex_end": "$CF",
+            "decimal_start": 206,
+            "decimal_end": 207
+          },
+          "basic_variant": "integer",
+          "description": "Arithmetic accumulator"
+        },
+        {
+          "address": {
+            "hex_start": "$D0",
+            "hex_end": "$DF",
+            "decimal_start": 208,
+            "decimal_end": 223
+          },
+          "basic_variant": "both",
+          "description": "BASIC scratch registers and pointers"
+        },
+        {
+          "address": {
+            "hex_start": "$D4",
+            "decimal_start": 212
+          },
+          "basic_variant": "both",
+          "description": "Returns error cord flag in decimal"
+        },
+        {
+          "address": {
+            "hex_start": "$D6",
+            "decimal_start": 214
+          },
+          "basic_variant": "integer",
+          "description": "RUN flag",
+          "usage": [
+            {
+              "code_snippet": "POKE 214,255",
+              "explanation": "Makes any command run a program"
+            },
+            {
+              "code_snippet": "POKE 214,0",
+              "explanation": "Restores the functions"
+            }
+          ]
+        },
+        {
+          "address": {
+            "hex_start": "$D8",
+            "decimal_start": 216
+          },
+          "basic_variant": "both",
+          "description": "ONERR flag",
+          "usage": [
+            {
+              "code_snippet": "POKE 216,0",
+              "explanation": "Cancels ONERR function"
+            },
+            {
+              "code_snippet": "PEEK(216)",
+              "explanation": "if PEEK (216)=127 then an error has occurred"
+            }
+          ]
+        },
+        {
+          "address": {
+            "hex_start": "$DA",
+            "hex_end": "$DB",
+            "decimal_start": 218,
+            "decimal_end": 219
+          },
+          "basic_variant": "both",
+          "description": "Line number last error occurred in",
+          "usage": {
+            "code_snippet": "L=PEEK(218)+PEEK(219)*256"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$DC",
+            "hex_end": "$DD",
+            "decimal_start": 220,
+            "decimal_end": 221
+          },
+          "basic_variant": "both",
+          "description": "ONERR error address",
+          "usage": {
+            "code_snippet": "?PEEK(220)+PEEK(221)*256"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$DE",
+            "decimal_start": 222
+          },
+          "basic_variant": "both",
+          "description": "ONERR error code",
+          "usage": {
+            "code_snippet": "?PEEK(222)",
+            "explanation": "0: NEXT without FOR; 16: Syntax error; 22: RETURN without GOSUB; 42: Out of DATA; 53: Illegal quantity (e.g., SQR(-1), array index out of bounds); 69: Overflow; 77: Out of memory; 90: Undefined statement; 107: Bad subscript (Array error); 120: Redimensioned array; 133: Division by zero; 163: Type mismatch (String vs Number); 176: String too long; 191: Formula too complex; 224: Undefined function; 254: Bad response to an INPUT statement; 255: CTRL-C interrupt attempted"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$E0",
+            "hex_end": "$E1",
+            "decimal_start": 224,
+            "decimal_end": 225
+          },
+          "basic_variant": "applesoft",
+          "description": "X of last HPLOT",
+          "usage": {
+            "code_snippet": "?PEEK(224)+PEEK(225)*256"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$E2",
+            "decimal_start": 226
+          },
+          "basic_variant": "applesoft",
+          "description": "Y of last HPLOT",
+          "usage": {
+            "code_snippet": "?PEEK(226)"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$E3",
+            "decimal_start": 227
+          },
+          "basic_variant": "both",
+          "description": "Not used"
+        },
+        {
+          "address": {
+            "hex_start": "$E4",
+            "decimal_start": 228
+          },
+          "basic_variant": "applesoft",
+          "usage":{
+            "code_snippet": "N=PEEK(228)",
+            "explanation": "Returns the HCOLOR code which is 0 if N=0; 1 if N=42 ($2A); 2 if N=85 ($55); 3 if N=127 ($7F); 4 if N=128 ($8F); 5 if N=170 ($AA); 6 if N=213 ($D5); and 7 if N=255 ($FF)"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$E6",
+            "decimal_start": 230
+          },
+          "basic_variant": "applesoft",
+          "usage": {
+            "code_snippet": "?PEEK(230)",
+            "explanation": "A 32 ($20) in this address means hi-res page 1 is being shown; 64 ($40) = page 2; 96 ($60) = page 3"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$E7",
+            "decimal_start": 231
+          },
+          "basic_variant": "applesoft",
+          "description": "SCALE"
+        },
+        {
+          "address": {
+            "hex_start": "$E8",
+            "hex_end": "$E9",
+            "decimal_start": 232,
+            "decimal_end": 233
+          },
+          "basic_variant": "applesoft",
+          "description": "Shape table start address"
+        },
+        {
+          "address": {
+            "hex_start": "$EA",
+            "decimal_start": 234
+          },
+          "basic_variant": "applesoft",
+          "usage": {
+            "code_snippet": "N=PEEK(234)",
+            "explanation": "If N=0 then last XDRAW started at a non-black hi-res point"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$EB",
+            "hex_end": "$EF",
+            "decimal_start": 235,
+            "decimal_end": 239
+          },
+          "basic_variant": "both",
+          "description": "Not used"
+        },
+        {
+          "address": {
+            "hex_start": "$F1",
+            "decimal_start": 241
+          },
+          "basic_variant": "applesoft",
+          "description": "256 minus the current SPEED",
+          "usage": {
+            "code_snippet": "SPEED=256-PEEK(241)"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$F2",
+            "hex_end": "$F8",
+            "decimal_start": 242,
+            "decimal_end": 248
+          },
+          "basic_variant": "applesoft",
+          "description": "General purpose registers"
+        },
+        {
+          "address": {
+            "hex_start": "$F3",
+            "decimal_start": 243
+          },
+          "basic_variant": "applesoft",
+          "description": "FLASH mask (POKE any number here to make listings unreadable)"
+        },
+        {
+          "address": {
+            "hex_start": "$F9",
+            "decimal_start": 249
+          },
+          "basic_variant": "applesoft",
+          "description": "ROT (0-64 = 0-360 degrees in 5.625 degree increments, 32 = 180 degrees)"
+        },
+        {
+          "address": {
+            "hex_start": "$FA",
+            "hex_end": "$FF",
+            "decimal_start": 250,
+            "decimal_end": 255
+          },
+          "basic_variant": "both",
+          "description": "Not used"
+        }
+      ]
+    },
+    "page_1_2_text_graphics": {
+      "description": "Page 1 and 2 Text and Graphics Memory Locations, Addresses $0300 to $0C00",
+      "memory_locations": [
+        {
+          "address": {
+            "hex_start": "$320",
+            "hex_end": "$321",
+            "decimal_start": 800,
+            "decimal_end": 801
+          },
+          "description": "Hi-res graphics horizontal coordinate"
+        },
+        {
+          "address": {
+            "hex_start": "$322",
+            "decimal_start": 802
+          },
+          "description": "Hi-res graphics vertical coordinate"
+        },
+        {
+          "address": {
+            "hex_start": "$324",
+            "hex_end": "$325",
+            "decimal_start": 804,
+            "decimal_end": 805
+          },
+          "description": "Starting address of shape table"
+        },
+        {
+          "address": {
+            "hex_start": "$32C",
+            "decimal_start": 812
+          },
+          "description": "Hi-res color"
+        },
+        {
+          "address": {
+            "hex_start": "$3D0",
+            "hex_end": "$3D2",
+            "decimal_start": 976,
+            "decimal_end": 978
+          },
+          "description": "Jump vector to DOS warm start",
+          "usage": {
+            "code_snippet": "JMP $9DBF"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3D2",
+            "decimal_start": 978
+          },
+          "description": "Memory left",
+          "usage": {
+            "code_snippet": "?(PEEK(978)+35)/4;\"K\"",
+            "explanation": "Returns available memory in KB"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3D3",
+            "hex_end": "$3D5",
+            "decimal_start": 979,
+            "decimal_end": 981
+          },
+          "description": "Jump vector to DOS cold start",
+          "usage": {
+            "code_snippet": "JMP $9D84"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3D6",
+            "hex_end": "$3D8",
+            "decimal_start": 982,
+            "decimal_end": 984
+          },
+          "description": "Jump vector to DOS File Manager",
+          "usage": {
+            "code_snippet": "JMP $AAFD"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3D9",
+            "hex_end": "$3DB",
+            "decimal_start": 985,
+            "decimal_end": 987
+          },
+          "description": "Jump vector to RWTS",
+          "usage": {
+            "code_snippet": "JMP $B7B5"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3DC",
+            "hex_end": "$3E2",
+            "decimal_start": 988,
+            "decimal_end": 994
+          },
+          "description": "Subroutine to locate file manager PARM list",
+          "usage": {
+            "code_snippet": "LDA 9D0F; LDY $9D0E"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3E3",
+            "hex_end": "$3E9",
+            "decimal_start": 995,
+            "decimal_end": 1001
+          },
+          "description": "Subroutine to locate RWTS PARM list",
+          "usage": {
+            "code_snippet": "LDA $AAC2; LDY $AAC1; RTS"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3EA",
+            "hex_end": "$3EE",
+            "decimal_start": 1002,
+            "decimal_end": 1006
+          },
+          "description": "Jump to replace DOS intercepts subroutine",
+          "usage": {
+            "code_snippet": "JMP $A851; NOP; NOP"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3EF",
+            "hex_end": "$3F1",
+            "decimal_start": 1007,
+            "decimal_end": 1009
+          },
+          "description": "Jump vector to Autostart BRK Handler",
+          "usage": {
+            "code_snippet": "JMP $FA59"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3F2",
+            "hex_end": "$3F4",
+            "decimal_start": 1010,
+            "decimal_end": 1012
+          },
+          "description": "<Control-Reset> vector",
+          "usage": {
+            "code_snippet": "JMP $9DBF",
+            "explanation": "Type address to JMP to at addresses 1010-1011 ($3F2.3F3), and then CALL -1169 to set address 1012; (POKE 1010,102: POKE 1011,213: POKE 1012,112 makes <Control-Reset> RUN; POKE 1010,105: POKE 1011,255: POKE 1012,90 messes up CATALOG and makes <Control-Reset> return to the monitor; POKE 592,0: POKE 1012,0 makes <Control-Reset> boot; POKE 592,255: POKE 1010,191: POKE 1011,157: POKE 1012,56 restores <Control-Reset>'s normal function)"
+          }
+        },
+        {
+          "address": {
+            "hex_start": "$3F4"
+          },
+          "description": "Power-up byte ($3F3 EOR $A5)"
+        },
+        {
+          "address": {
+            "hex_start": "$3F5",
+            "hex_end": "$3F7",
+            "decimal_start": 1013,
+            "decimal_end": 1015
+          },
+          "description": "Ampersand vector",
+          "usage": [
+            {
+              "code_snippet": "JMP $FF58"
+            },
+            {
+              "code_snippet": "POKE 1014,110: POKE 1015,165",
+              "explanation": "Makes & CATALOG"
+            },
+            {
+              "code_snippet": "POKE 1014,18: POKE 1015,217",
+              "explanation": "Makes & RUN"
+            }
+          ]
+        },
+        {
+          "address": {
+            "hex_start": "$3F8",
+            "hex_end": "$3FA",
+            "decimal_start": 1016,
+            "decimal_end": 1018
+          },
+          "description": "Control-Y vector",
+          "usage": [
+            {
+              "code_snippet": "JMP $FF65"
+            },
+            {
+              "code_snippet": "POKE 1016,76: POKE 1017,208: POKE 1018,3",
+              "explanation": "Makes <Control-Y> JuMP to address $03D0 (address 976) (JuMP=76, 03=3, D0=208)"
+            },
+            {
+              "code_snippet": "POKE 1016,76: POKE 1017,105: POKE 1018,255",
+              "explanation": "Makes <Control-Y> enter the monitor"
+            }
+          ]
+        },
+        {
+          "address": {
+            "hex_start": "$3FB",
+            "hex_end": "$3FD",
+            "decimal_start": 1019,
+            "decimal_end": 1021
+          },
+          "description": "Jump vector to NMI handler"
+        },
+        {
+          "address": {
+            "hex_start": "$3FE",
+            "hex_end": "$3FF",
+            "decimal_start": 1022,
+            "decimal_end": 1023
+          },
+          "description": "Vector for IRQ handler"
+        },
+        {
+          "address": {
+            "hex_start": "$57B",
+            "decimal_start": 1403
+          },
+          "description": "Cursor's column position minus 1 (HTAB's place) in 80-column mode"
+        },
+        {
+          "address": {
+            "hex_start": "$778",
+            "decimal_start": 1912
+          },
+          "description": "Linefeed enable, disable",
+          "usage": [
+            {
+              "code_snippet": "POKE 1912+SLOT,1",
+              "explanation": "On Apple Parallel Card will enable linefeed"
+            },
+            {
+              "code_snippet": "POKE 1912+SLOT,0",
+              "explanation": "On Apple Parallel Card will disable linefeed"
+            }
+          ]
+        },
+        {
+          "address": {
+            "hex_start": "$801",
+            "decimal_start": 2049
+          },
+          "usage": {
+            "code_snippet": "POKE 2049,1",
+            "explanation": "Makes first BASIC program line list repeatedly"
+          }
+        }
+      ]
+    },
+    "dos_3_3_locations": {
+      "description": "DOS 3.3 Memory Locations, Addresses $9600 to $BFFF",
+      "memory_locations": [
+        {
+          "addresses": [
+            {
+              "hex": "$9D01",
+              "decimal": 40193,
+              "negative_decimal": -25343
+            },
+            {
+              "hex": "$A7D4",
+              "decimal": 42964,
+              "negative_decimal": -22572
+            }
+          ],
+          "description": "Moves DOS buffers down N*256 bytes",
+          "usage": {
+            "code_snippet": "POKE 40193,PEEK(40193)-N:CALL 42964"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$9E42",
+              "decimal": 40514,
+              "negative_decimal": -25022
+            }
+          ],
+          "description": "Greeting program run flag",
+          "usage": {
+            "explanation": "A value of 20 will make DOS 3.3 EXECUTE the greeting program; a value of 52 makes DOS 3.3 BRUN it"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$A545",
+              "decimal": 42309,
+              "negative_decimal": -23227
+            }
+          ],
+          "description": "INITialize command control",
+          "usage": {
+            "code_snippet": "POKE 42309,96",
+            "explanation": "Kills INITialize command"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$A56E",
+              "decimal": 42350,
+              "negative_decimal": -23168
+            }
+          ],
+          "description": "CATALOG routine"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$A710",
+              "hex_end": "$A712",
+              "decimal_start": 42768,
+              "decimal_end": 42770,
+              "negative_decimal_start": -22768,
+              "negative_decimal_end": -22766
+            }
+          ],
+          "description": "DOS error message control",
+          "usage": {
+            "code_snippet": "POKE 42768,234: POKE 42769,234: POKE 42770,234",
+            "explanation": "Cancels all DOS error messages"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$A884",
+              "hex_end": "$A907",
+              "decimal_start": 43140,
+              "decimal_end": 43271,
+              "negative_decimal_start": -22396,
+              "negative_decimal_end": -22265
+            }
+          ],
+          "description": "DOS 3.3 commands (on track 1 sectors 7-8 on normal DOS 3.3 disk)"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$A972",
+              "hex_end": "$AA3E",
+              "decimal_start": 43378,
+              "decimal_end": 43582,
+              "negative_decimal_start": -22158,
+              "negative_decimal_end": -21954
+            }
+          ],
+          "description": "DOS 3.3 error messages (track 1 sectors 8-9 on normal DOS 3.3 disk)"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AA57",
+              "decimal": 43607,
+              "negative_decimal": -21929
+            }
+          ],
+          "description": "MAXFILES value"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AA60",
+              "decimal": 43616,
+              "negative_decimal": -21920
+            },
+            {
+              "hex": "$AA61",
+              "decimal": 43617,
+              "negative_decimal": -21919
+            }
+          ],
+          "description": "Last BLOAD length",
+          "usage": {
+            "code_snippet": "?PEEK(43616)+PEEK(43617)*256"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AA68",
+              "decimal": 43624,
+              "negative_decimal": -21912
+            }
+          ],
+          "description": "Active disk drive number"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AA6A",
+              "decimal": 43626,
+              "negative_decimal": -21910
+            }
+          ],
+          "description": "Active slot number"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AA72",
+              "decimal": 43634,
+              "negative_decimal": -21902
+            },
+            {
+              "hex": "$AA73",
+              "decimal": 43635,
+              "negative_decimal": -21901
+            }
+          ],
+          "description": "Last BLOAD start",
+          "usage": {
+            "code_snippet": "?PEEK(43634)+PEEK(43635)*256"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AAB1",
+              "decimal": 43697,
+              "negative_decimal": -21839
+            }
+          ],
+          "description": "MAXFILES default value"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AAB2",
+              "decimal": 43698,
+              "negative_decimal": -21838
+            }
+          ],
+          "description": "Control-D command character",
+          "usage": {
+            "code_snippet": "POKE 43698,N",
+            "explanation": "Makes CHR$(N) replace CHR$(4)"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AAB6",
+              "decimal": 43702,
+              "negative_decimal": -21834
+            }
+          ],
+          "description": "BASIC flag",
+          "usage": {
+            "code_snippet": "N=PEEK(43702)",
+            "explanation": "If N=0 you're in INT BASIC; if N=64, FP ROM; if N=128, FP RAM"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AC01",
+              "decimal": 44033,
+              "negative_decimal": -21503
+            }
+          ],
+          "description": "CATALOG track number",
+          "usage": [
+            {
+              "code_snippet": "POKE 44033,0",
+              "explanation": "Returns an I/O error when CATALOG is entered"
+            },
+            {
+              "code_snippet": "POKE 44033,17",
+              "explanation": "Returns back to normal"
+            }
+          ]
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$ADA4",
+              "decimal": 44452,
+              "negative_decimal": -21084
+            }
+          ],
+          "description": "Number of file names before catalog listing pauses plus one",
+          "notes": "See address 44605"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$ADAC",
+              "decimal": 44460,
+              "negative_decimal": -21076
+            },
+            {
+              "hex": "$ADAD",
+              "decimal": 44461,
+              "negative_decimal": -21075
+            }
+          ],
+          "description": "Clear screen before catalog",
+          "usage": {
+            "code_snippet": "POKE 44460,88: POKE 44461,252",
+            "explanation": "Clears screen before catalog"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$ADC0",
+              "hex_end": "$ADC2",
+              "decimal_start": 44480,
+              "decimal_end": 44482
+            },
+            {
+              "hex": "$BB69",
+              "hex_end": "$BB8F",
+              "decimal_start": 47977,
+              "decimal_end": 48015
+            },
+            {
+              "hex": "$B3AF",
+              "hex_end": "$B3BA",
+              "decimal_start": 45999,
+              "decimal_end": 46010
+            }
+          ],
+          "description": "Change VOLUME #xxx to SECTORS FREE =xxx",
+          "usage": {
+            "code_type": "monitor",
+            "code_snippet": "ADC0: 20 69 BA\nBB69: A9 00 85 40 85 41 A0 C8 18 B9 F2 B3 F0 0E 0A 90 FB 48 E6 40 D0 02 E6 41 68 18 90 F0 88 D0 E9 A6 40 A5 41 20 24 ED 60\nB3AF: A0 BD A0 D4 C3 C5 D3 A0 C5 C5 D2 C6",
+            "explanation": "Enter this while in the monitor"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$ADD9",
+              "decimal": 44505,
+              "negative_decimal": -21031
+            },
+            {
+              "hex": "$ADDA",
+              "decimal": 44506,
+              "negative_decimal": -21030
+            }
+          ],
+          "description": "Show deleted files in catalog",
+          "usage": {
+            "code_snippet": "POKE 44505,234: POKE 44506,234",
+            "explanation": "Shows deleted files in catalog"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AE17",
+              "decimal": 44567,
+              "negative_decimal": -20969
+            }
+          ],
+          "description": "Number of characters minus one in CATALOG file name"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AE22",
+              "hex_end": "$AE24",
+              "decimal_start": 44578,
+              "decimal_end": 44580,
+              "negative_decimal_start": -20958,
+              "negative_decimal_end": -20956
+            }
+          ],
+          "description": "Cancel carriage returns after catalog file names",
+          "usage": {
+            "code_snippet": "POKE 44578,234: POKE 44579,234: POKE 44580,234",
+            "explanation": "Cancels carriage returns after catalog file names"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AE34",
+              "hex_end": "$AE36",
+              "decimal_start": 44596,
+              "decimal_end": 44598,
+              "negative_decimal_start": -20940,
+              "negative_decimal_end": -20938
+            }
+          ],
+          "description": "Cancel catalog pause",
+          "usage": {
+            "code_snippet": "POKE 44596,234: POKE 44597,234: POKE 44598,234",
+            "explanation": "Cancels catalog pause"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AE37",
+              "hex_end": "$AE38",
+              "decimal_start": 44599,
+              "decimal_end": 44600,
+              "negative_decimal_start": -20937,
+              "negative_decimal_end": -20936
+            }
+          ],
+          "description": "Wait for keypress after each catalog file",
+          "usage": [
+            {
+              "code_snippet": "POKE 44599,234: POKE 44600,234",
+              "explanation": "Waits for keypress after each catalog file"
+            },
+            {
+              "code_snippet": "POKE 44599,208: POKE 44600,8",
+              "explanation": "Restores to normal (get back to normal)"
+            }
+          ]
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$AE3D",
+              "decimal": 44605,
+              "negative_decimal": -20931
+            }
+          ],
+          "description": "Number of file names before catalog pause",
+          "usage": {
+            "code_snippet": "POKE 44452,N+1: POKE 44605,N",
+            "explanation": "Allows N file names before the pause"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$B201",
+              "hex_end": "$B203",
+              "decimal_start": 45569,
+              "decimal_end": 45571,
+              "negative_decimal_start": -19967,
+              "negative_decimal_end": -19965
+            },
+            {
+              "hex": "$BA69",
+              "hex_end": "$BA75",
+              "decimal_start": 47721,
+              "decimal_end": 47733,
+              "negative_decimal_start": -17815,
+              "negative_decimal_end": -17803
+            }
+          ],
+          "description": "DOS wildcard using '='",
+          "usage": {
+            "code_type": "monitor",
+            "code_snippet": "B201: 4C 71 BA\nBA69: E8 B1 42 DD C6 B4 D0 0A C8 C0 1E D0 F3 AE 9C B3 18 60 C9 AD F0 F7 4C 0B B2",
+            "explanation": "Enter this while in the monitor for DOS wildcard using '='"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$B3A7",
+              "hex_end": "$B3AE",
+              "decimal_start": 45991,
+              "decimal_end": 45998,
+              "negative_decimal_start": -19545,
+              "negative_decimal_end": -19538
+            }
+          ],
+          "description": "File-type codes"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$B3AF",
+              "hex_end": "$B3BA",
+              "decimal_start": 45999,
+              "decimal_end": 46010,
+              "negative_decimal_start": -19537,
+              "negative_decimal_end": -19526
+            }
+          ],
+          "description": "Current disk volume heading spelled backwards (track 2 sector 2 on regular DOS 3.3 disk)"
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$B3C1",
+              "decimal": 46017,
+              "negative_decimal": -19519
+            }
+          ],
+          "description": "Current disk volume number",
+          "usage": {
+            "code_snippet": "?PEEK(46017)"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$B3F0",
+              "decimal": 46064,
+              "negative_decimal": -19472
+            }
+          ],
+          "description": "Number of sectors per track on current disk",
+          "usage": {
+            "code_snippet": "N=PEEK(46064)",
+            "explanation": "If N=13, then the DOS being used is 3.2; if N=16, then 3.3"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$B96A",
+              "decimal": 47466,
+              "negative_decimal": -18070
+            }
+          ],
+          "description": "DOS 3.3 presence check",
+          "usage": {
+            "code_snippet": "PEEK(47466)",
+            "explanation": "If PEEK(47466) returns 150, then DOS 3.3 is in memory"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$BA01",
+              "decimal": 47617,
+              "negative_decimal": -17919
+            }
+          ],
+          "description": "Disk drive access speed",
+          "usage": {
+            "code_snippet": "POKE 47617,12",
+            "explanation": "Speeds disk drive access"
+          }
+        },
+        {
+          "addresses": [
+            {
+              "hex": "$BFD3",
+              "hex_end": "$BFD5",
+              "decimal_start": 49107,
+              "decimal_end": 49109,
+              "negative_decimal_start": -16429,
+              "negative_decimal_end": -16427
+            }
+          ],
+          "description": "Prevent language card reload",
+          "usage": {
+            "code_snippet": "POKE 49107,234: POKE 49108,234: POKE 49109,234",
+            "explanation": "Prevents any language card reload"
+          }
+        }
+      ]
+    },
+    "prodos_locations": {
+      "description": "ProDOS Memory Locations, Addresses $9600 to $BFFF",
+      "memory_locations": []
+    }
+  } 
+}

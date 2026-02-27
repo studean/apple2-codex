@@ -1,0 +1,358 @@
+* = Applesoft BASIC only
+** = Integer BASIC only
+
+PEEK and/or POKE address(es) DESCRIPTION
+HEX DECIMAL
+ZERO PAGE
+ADDRESSES $0000.00FF (0-255)
+$0.5......0-5......................*....Jump instructions
+$6.9......6-9......................*....Not used
+$0A.0C....10-12....................*....USR jump instruction
+$0D.17....13-23....................*....Flags and counters
+$18.......24............................First track of DOS data
+$19.......25............................First sector of DOS data
+$1A.......26............................Number of DOS sectors to load
+$1B.......27............................High byte of DOS buffer (low byte is always 00)
+$1A.1B....26-27.........................DRAW and XDRAW shape pointer
+$1C.......28............................Last color used
+$1D.1F....29-31.........................Not used
+$20.......POKE 32,N...(entering TEXT....(N is 0-39; norm is 0) Text window left edge
+$21.......POKE 33,N.........restores....(N is 1-40/1-80; norm is 40/80) Text window right edge
+$22.......POKE 34,N......normal text....(N is 0-23; norm is 0) Text window top edge
+$23.......POKE 35,N..........window)....(N is 1-24; norm is 24) Text window bottom
+$24.......36............................Cursor's column position minus 1 (HTAB's place)
+$25.......37............................Cursor's row location minus 1 (VTAB's place)
+$25; $FC66; $FC1A; $24..POKE 37,R: CALL -922: CALL -998: POKE 36,C..(R=row; C=column) Plots cursor positionz
+$26.27....?PEEK(38)+PEEK(39)*256........Address of current low-res cursor row
+$28.29....?PEEK(40)+PEEK(41)*256........Address of current text cursor row
+$2A.2B....42-43.........................Row pointer for text scrolling
+$2B.......43............................Last booted slot number * 16
+$2C.......?PEEK(44).....................Last lo-res HLIN right endpoint
+$2D.......?PEEK(45).....................Last lo-res VLIN bottom endpoint
+$2E.......N=PEEK(46)....................If N=15 ($0F) then a lo-res color block is to be plotted in the lower half of the screen; if N=240 ($F0) then it will be plotted in the upper half
+$2F.......47............................Sometimes DOS volume number
+$30.......48............................Lo-res color * 17
+$32.......50............................In N=PEEK(50), the current text format is INVERSE if N=63 ($3F); FLASH if N=127 ($7F); and NORMAL if N=255 ($FF); (also POKE 50,128 will make listing and CATALOG invisible)
+$33.......51............................ASCII character for INPUT prompt symbol; also, POKEing here sometimes defeats "Not Direct Command" error
+$34.49....52-73.........................Monitor and DOS registers
+$48.......72............................A POKE here resets the status register
+$4A.4B....74-75...................**....LOMEM
+$4C.4D....76-77...................**....HIMEM
+$4E.4F....78-79.........................Random number field; for a better random number generator, use RND(PEEK(78)+PEEK(79)*256)
+$50.61....80-97....................*....Pointers
+$52.......82.......................*....POKE 82,128 makes any command RUN
+$62.66....98-102........................Result of last-floating point multiplication or division operation
+$67.68....103-104.......................Start of BASIC program
+$69.6A....105-106.......................LOMEM; end of BASIC program and start of variable space
+$6B.6C....107-108.......................Start of defined array space
+$6D.6E....109-110.......................End of defined array space
+$6F.70....111-112.......................Start of string storage
+$71.72....113-114..................*....Temporary register
+$73.74....115-116..................*....HIMEM - 1; highest address available to BASIC program
+$75.76....117-118.......................Line number being executed
+$77.78....119-120.......................Line number where program stopped
+$79.7A....121-122.......................Address of next statement to be executed
+$7B.7C....123-124.......................Next DATA line number
+$7D.7E....125-126.......................Next DATA address
+$7F.80....127-128.......................INPUT source pointer
+$81.82....?CHR$(PEEK(129))+CHR$(PEEK(130))..Last used variable's name
+$83.84....?PEEK(131)+PEEK(132)*256......Last used variable's address
+$85.9C....133-156..................*....General-purpose registers
+$9D.A3....157-163.......................Main floating-point arithmetic accumulator
+$A5.AB....165-171.......................Axilary floating-point arithmetic accumulator
+$AC.AE....172-174..................*....General-purpose registers
+$AF.B0....175-176.......................End of BASIC program
+$B1.C8....177-200..................*....Get-character routine
+$C9.CD....201-205.......................Floating point random number
+$CE.CF....206-207.................**....Arithmetic accumulator
+$D0.DF....208-223.......................BASIC scratch registers and pointers
+$D4.......212...........................Returns error cord flag in decimal
+$D6.......214.....................**....RUN flag (POKE 214,255 makes any command run a program; POKE 214,0 restores the functions)
+$D8.......216...........................ONERR flag (if PEEK (216)=127 then an error has occurred; POKE 216,0 cancels ONERR function)
+$DA.DB....L=PEEK(218)+PEEK(219)*256.....Line number last error occured in
+$DC.DD....?PEEK(220)+PEEK(221)*256......ONERR error address
+$DE.......?PEEK(222)....................ONERR error code (see table below)
+$E0.E1....?PEEK(224)+PEEK(225)*256..*...X of last HPLOT
+$E2.......?PEEK(226)...............*....Y of last HPLOT
+$E3.......227...........................Not used
+$E4.......228......................*....N=PEEK(228) returns the HCOLOR code which is 0 if N=0; 1 if N=42 ($2A); 2 if N=85 ($55); 3 if N=127 ($7F); 4 if N=128 ($8F); 5 if N=170 ($AA); 6 if N=213 ($D5); and 7 if N=255 ($FF)
+$E6.......230......................*....A 32 ($20) in this address means hi-res page 1 is being shown; 64 ($40) = page 2; 96 ($60) = page 3
+$E7.......231......................*....SCALE
+$E8.E9....232-233..................*....Shape table start address
+$EA.......N=PEEK(234)..............*....If N=0 then last XDRAW started at a non-black hi-res point
+$EB.EF....235-239.......................Not used
+$F1.......241......................*....256 minus the current SPEED; to find the speed, use this formula: SPEED=256-PEEK(241)
+$F2.F8....242-248..................*....General-purpose registers
+$F3.......243......................*....FLASH mask (POKE any number here to make listings unreadable)
+$F9.......249......................*....ROT (0-64 = 0-360 degrees, 32 = 180 degrees)
+$FA.FF....250-255.......................Not used
+
+MONITOR VARIABLES/VECTORS;
+PAGE 1/PAGE 2 TEXT/GRAPHICS
+ADDRESSES $0300.0C00 (768-3072)
+$320.321....800-801.....................Hi-res graphics horizontal coordinate
+$322........802.........................Hi-res vertical coordinate
+$324.325....804-805.....................Starting address of shape table
+$32C........812.........................Hi-res color
+$3D0.$3D2...976-978.....................Jump vector to DOS warm start (JMP $9DBF)
+$3D2........?(PEEK(978)+35)/4;"K".......Memory left
+
+$3D3.3D5....979-981.....................Jump vector to DOS cold start (JMP $9D84)
+$3D6.3D8....982-984.....................Jump vector to DOS File Manager (JMP $AAFD)
+$3D9.3DB....985-987.....................Jump vector to RWTS (JMP $B7B5)
+$3DC.3E2....988-994.....................Subroutine to locate file manager PARM list (LDA $9D0F; LDY $9D0E)
+$3E3.3E9....995-1001....................Subroutine to locate RWTS PARM list (LDA $AAC2; LDY $AAC1; RTS)
+$3EA.3EE....1002-1006...................Jump to replace DOS intercepts subroutine (JMP $A851; NOP; NOP)
+$3EF.3F1....1007-1009...................Jump vector to Autostart BRK Handler (JMP $FA59)
+$3F2.3F4....1010-1012...................<Control-Reset> vector (JMP $9DBF); type address to JMP to at addresses 1010-1011 ($3F2.3F3), and then CALL -1169 to set address 1012
+                                        (POKE 1010,102: POKE 1011,213: POKE 1012,112 makes <Control-Reset> RUN;
+                                        POKE 1010,105: POKE 1011,255: POKE 1012,90 messes up CATALOG and makes <Control-Reset> return to the monitor;
+                                        POKE 592,0: POKE 1012,0 makes <Control-Reset> boot;
+                                        POKE 592,255: POKE 1010,191: POKE 1011,157: POKE 1012,56 restores <Control-Reset>'s normal function)
+$3F4....................................Power-up byte ($3F3 EOR $A5)
+$3F5.3F7....1013-1015...................Ampersand ("&") vector (JMP $FF58) (POKE 1014,165: POKE 1015,214 makes "&" LIST;
+                                        POKE 1014,110: POKE 1015,165 makes "&" CATALOG;
+                                        POKE 1014,18: POKE 1015,217 makes "&" RUN)
+$3F8.3FA....1016-1018...................Control-Y vector (JMP $FF65)
+                                        (POKE 1016,76: POKE 1017,208: POKE 1018,3 makes <Control-Y> JuMP to address $03D0 (address 976) (JuMP=76, 03=3, D0=208);
+                                        POKE 1016,76: POKE 1017,105: POKE 1018,255 makes <Control-Y> enter the monitor)
+$3FB.3FD....1019-1021...................Jump vector to NMI handler
+$3FE.3FF....1022-1023...................Vector for IRQ handler
+$57B........1403........................Cursor's column position minus 1 (HTAB's place) in 80-column mode
+$778........1912+SLOT...................Linefeed enable, disable (POKE 1912+SLOT,1 on Apple Parallel Card will enable linefeed; POKE 1912+SLOT,0 will disable linefeed)
+$801........2049........................POKE 2049,1 makes first BASIC program line list repeatedly
+
+
+HEXADECIMAL NEGATIVE DECIMAL POSITIVE DECIMAL
+DOS LOCATIONS
+WITH DOS 3.3 LOADED INTO MEMORY
+ADDRESSES $9600.BFFF (38400-49151) (-27136 TO -16385)
+$9D01; $A7D4..-25343;-22572.......POKE 40193,PEEK(40193)-N:CALL 42964..Moves DOS buffers down N*256 bytes
+$9E42.........-25022..............40514..........Greeting program run flag (a value of 20 will make DOS 3.3 EXECute the greeting program; a value of 52 makes DOS 3.3 BRUN it.)
+$A545.........-23227..............42309..........POKE 42309,96 kills INITialize command
+$A56E.........-23168..............42350..........CATALOG routine
+$A710.A712....-22768 TO -22766....POKE 42768,234: POKE 42769,234: POKE 42770,234..Cancels all DOS error messages
+$A884.A907....-22396 TO -22265....43140-43271....DOS 3.3 commands (on track 1 sectors 7-8 on normal DOS 3.3 disk)
+$A972.AA3E....-22158 TO -21954....43378-43582....DOS 3.3 error messages (track 1 sectors 8-9 on normal DOS 3.3 disk)
+$AA57.........-21929..............43607..........MAXFILES value
+$AA60; $AA61..-21920; -21919......?PEEK(43616)+PEEK(43617)*256..Last BLOAD length
+$AA68.........-21912..............43624..........Active disk drive number
+$AA6A.........-21910..............43626..........Active slot number
+$AA72; $AA73..-21902; -21901......?PEEK(43634)+PEEK(43635)*256..Last BLOAD start
+$AAB1.........-21839..............43697..........MAXFILES default value
+$AAB2.........-21838..............43698..........Control-D command character (POKE 43698,N makes CHR$(N) replace CHR$(4))
+$AAB6.........-21834..............43702..........BASIC flag (in N=PEEK(43702), if N=0 you're in INT BASIC; if N=64, FP ROM; if N=128, FP RAM)
+$AC01.........-21503..............44033..........CATALOG track number (POKE 44033,0 returns an I/O error when CATALOG is entered; POKE 44033,17 returns back to normal)
+$ADA4.........-21084..............44452..........Number of file names before catalog listing pauses plus one (see address 44605)
+$ADAC; $ADAD..-21076; -21075......44460-44461....POKE 44460,88: POKE 44461,252 clears screen before catalog
+$ADC0.ADC2; BB69.BB8F; B3AF.B3BA..44480-44482; 47977-48015; 45999-46010..To change VOLUME #xxx to SECTORS FREE =xxx then enter this while in the monitor:
+                                                    ADC0: 20 69 BA
+                                                    BB69: A9 00 85 40 85 41 A0 C8 18 B9 F2 B3 F0 0E 0A 90 FB 48 E6 40 D0 02 E6 41 68 18 90 F0 88 D0 E9 A6 40 A5 41 20 24 ED 60
+                                                    B3AF: A0 BD A0 D4 C3 C5 D3 A0 C5 C5 D2 C6
+$ADD9; $ADDA..-21031; -21030......44505-44506....POKE 44505,234: POKE 44506,234 shows deleted files in catalog
+$AE17.........-20969..............44567..........Number of characters minus one in CATALOG file name
+$AE22.AE24....-20958 TO -20956....44578-44580....POKE 44578,234: POKE 44579,234: POKE 44580,234 cancels carriage returns after catalog file names
+$AE34.AE36....-20940 TO -20938....44596-44598....POKE 44596,234: POKE 44597,234: POKE 44598,234 cancels catalog pause
+$AE37.AE38....-20937 TO -20936....44599-44600....POKE 44599,234: POKE 44600,234 waits for keypress after each catalog file (to get back to normal, POKE 44599,208: POKE 44600,8)
+$AE3D.........-20931..............44605..........Number of file names before catalog pause (POKE 44452,N+1: POKE 44605,N allows N file names before the pause)
+$B201.B203; BA69.BA75..-19967 TO -19965; -17815 TO -17803..45569-45571; 47721-47733..For DOS wildcard using "=", enter this while in the monitor:
+                                                    B201: 4C 71 BA
+                                                    BA69: E8 B1 42 DD C6 B4 D0 0A C8 C0 1E D0 F3 AE 9C B3 18 60 C9 AD F0 F7 4C 0B B2
+$B3A7.B3AE....-19545 TO -19538....45991-45998....File-type codes
+$B3AF.B3BA....-19537 TO -19526....45999-46010....Current disk volume heading spelled backwards (track 2 sector 2 on regular DOS 3.3 disk)
+$B3C1.........-19519..............?PEEK(46017)...Current disk volume number
+$B3F0.........-19472..............N=PEEK(46064)..Number of sectors per track on current disk (if N=13, then the DOS being used is 3.2; if N=16, then 3.3)
+$B96A.........-18070..............47466..........If PEEK(47466) returns 150, then DOS 3.3 is in memory
+$BA01.........-17919..............47617..........A POKE of 12 here speeds disk drive access
+$BFD3.BFD5....-16429 TO -16427....49107-49109....POKE 49107,234: POKE 49108,234: POKE 49109,234 prevents any language card reload
+
+DOS LOCATIONS
+WITH PRODOS LOADED INTO MEMORY
+ADDRESSES $9600.BFFF (38400-49151) (-27136 TO -16385)
+$B878.B8E8....-18312 TO -18200....47224-47336....ProDOS Version 1.1.1 commands (track $10, sector $7 on normal ProDOS disk)
+$BE3C.........-16836..............48700..........Active slot number
+$BE3D.........-16835..............48701..........Active disk drive number
+$BEB7.........-16713..............48823..........A 33 or a 1 in this location means that the file just VERIFYed was locked
+$BED7; $BED8..-16681; -16680......?PEEK(48855)+PEEK(48856)*256..Last BLOAD start address
+$BED9; $BEDA..-16679; -16678......?PEEK(48857)+PEEK(48858)*256..Last BLOAD length
+$BF90.........-16496..............49040..........Day/month
+$BF91.........-19495..............49041..........Year
+$BF92.........-16494..............49042..........Minute
+$BF93.........-16493..............49043..........Hour
+
+INPUT/OUTPUT/PERIPHERAL CARDS
+ADDRESSES $C000.CFFF (49152-53247) (-16384 TO -12289)
+$C000.C00F....-16384 TO -16369....K=PEEK(49152)-128 TO K=PEEK(49167)-128..All PEEKs in this area achieve the same result: ASCII code for the last keypress; if K<0 then no key was pressed
+$C00A.........-16374..............49162..........POKE 49162,0 allows the functions of an 80-column card (except 80-columns) on an Apple IIe
+$C010.C01F....-16368 TO -16353....49168,0-49183,0..All POKEs in this area achieve the same result: clear keyboard
+$C020.C02F....-16352 TO -16337....49184-49199....All PEEKs in this area achieve the same result: a single click at cassette OUT jack
+$C030.C03F....-16336 TO -16321....49200-49215)...All PEEKs in this area achieve the same result: a single click at speaker
+$C040.C04F....-16320 TO -16305....49216-49231....Utility stobe output
+$C050.C057....-16304 TO -16297....49232-49239....Soft (display) switches
+$C058.C07F....-16296 TO -16257....49240-49279....I/O status for controller
+$C058.C05F....-16296 TO -16289....49240-49247....Game paddle commands
+$C061+P.......-16287+P............N=PEEK(49249+P)-128..(P can be 0, 1, or 2) If N>127 then paddle button #P is being pressed or is not connected (paddle button #0 = Open Apple key; #1 = Solid Apple key; #2 = Shift key)
+$C0E8.........-16152..............POKE 49384,0...Stops motor at disk drive #1
+$C0E9.........-16151..............POKE 49385,0...Starts motor at disk drive #1
+$C0F8.........-16136..............POKE 49400,0...Stops motor at disk drive #2
+$C0F9.........-16135..............POKE 49401,0...Starts motor at disk drive #2
+$C100.C1FF....-16128 TO -15873....49408-49665....Peripheral slot #1 ROM
+$C200.C2FF....-15872 TO -15617....49664-49921....Peripheral slot #2 ROM
+$C300.C3FF....-15616 TO -15361....49920-50177....Peripheral slot #3 ROM
+$C400.C4FF....-15360 TO -15105....50176-50433....Peripheral slot #4 ROM
+$C500.C5FF....-15104 TO -14849....50432-50689....Peripheral slot #5 ROM
+$C600.C6FF....-14848 TO -14593....50688-50945....Peripheral slot #6 ROM
+$C700.C7FF....-14592 TO -12289....50944-51199....Peripheral slot #7 ROM
+
+APPLESOFT ROM
+ADDRESSES $D000-$F7FF (53248-63487) (-12288 TO -2049)
+$D0D0.D25E....-12080 TO -11682....53456-53854....Applesoft BASIC commands
+$D260.D362....-11680 TO -11422....53856-54114....Applesoft BASIC error messages
+$DCDF.DCF6....-8993 TO -8970......56543-56566...."Extra Ignored" and "Reenter" messages
+
+MONITOR ROM
+ADDRESSES $F800-$FFFF (63488-65535) (-2048 TO -1)
+$FBB3; $FBC0..-1101; -1088........A=PEEK(64435): B=PEEK(64448)..If A=6 and B=0 then the computer being used is an Apple IIc; if A=6 and B>223 and B<240 then it's a IIe; if A=234 then it's a II+; otherwise, it's an Apple II
+$FD83.........-637................A=PEEK(64899)..If A=255 then Apple IIe; if A=223 then Apple II or II+; if A=234 then Franklin Ace
+$FF0A.FF12....-246 TO -238........65290-65298....Top of screen heading when computer is booted
+_______________________________________________________________________________________________________________
+
+MACHINE LANGUAGE SUBROUTINES (CALLS)
+
+HEX + CALL - DESCRIPTION
+$3D0.....976...........-64560....Enters BASIC from monitor or mini-assembler
+$3D2.....978......CALL -64558....Reconnects DOS 3.3 or ProDOS
+$3D9.....985......CALL -64551....Makes a cow sound (moo)
+$3EA.....1002.....CALL -64534....Reconnects DOS I/O hooks
+$3F2.....1010.....CALL -64526....Control-Reset vector
+$3F5.....1013.....CALL -64523....Ampersand ("&") vector
+$3F8.....1016.....CALL -64520....Control-Y vector
+$803.....2051.....CALL -63485....Enters the mini-assembler from monitor
+$1300....4864.....CALL -60672....Executes a BASIC program compiled with "Einstein Compiler"
+$9DBF....40383....CALL -25153....Reconnects DOS 3.3
+$A56E....42350....CALL -23168....CATALOGs
+$C030....49200....CALL -16336....Toggles speaker
+
+
+APPLESOFT ROM
+ADDRESSES $D000-$F7FF (53248-63487) (-12288 TO -2049)
+$D1FC....53756....CALL -11780....Hi-res "Find" or position
+$D2C9....53961....CALL -11272....Hi-res "Find" or background
+$D331....54065....CALL -11471....Hi-res graphics background
+$D33A....54074....CALL -11462....Hi-res DRAW1
+$D3B9....54201....CALL -11335....Hi-res SHLOAD
+$D683....54915....CALL -10621....Clears any incompleted FOR...NEXT loops and any GOSUBs that were not RETURNed
+$DAFB....56059....CALL -9477.....Carriage return
+$E000....57344....CALL -8192.....Resets Integer BASIC; clears variables
+$E04B....57419....CALL -8117.....Integer BASIC LIST
+$E484....58500....CALL -7036.....Perform Applesoft garbage collection routine
+$E5AD....58797....CALL -6739.....NEW
+$E5B7....58807....CALL -6729.....PLOTs a point on the screen
+$E836....59446....CALL -6090.....Integer BASIC CHAIN
+$EFEC....61420....CALL -4116.....Integer BASIC RUN
+$F07C....61564....CALL -3972.....Integer BASIC LOAD from tape
+$F0E0....61664.........-3872.....Leaves monitor
+$F123....61731....CALL -3805.....DRAWS predefined shape
+$F14F....61775....CALL -3761.....Plots hi-res point
+$F171....61809....CALL -3727.....Turn on Integer BASIC TRACE
+$F176....61814....CALL -3722.....Turn off Integer BASIC TRACE
+$F30A....62218....CALL -3318.....Integer BASIC CON
+$F317....62231....CALL -3305.....Applesoft RESUME
+$F328....62248....CALL -3288.....Clears error-handling information when RESUME is not used to exit an error-handling routine
+$F3DE....62430....CALL -3106.....HGRs
+$F3E4....62436....CALL -3100.....Shows hi-res page 1 without clearing it
+$F3F2....62450....CALL -3086.....Clears hi-res page 1 to black
+$F3F6....62454....CALL -3082.....Clears hi-res page 1 to last color HPLOTted
+$F5CB....62923....CALL -2613.....Makes next shape table DRAW or XDRAW coordinates appear in addresses $EO, $E1, and $E2 (see the PEEKS AND POKES table above)
+$F666....63078....CALL -2458.....Enter mini-assembler
+
+MONITOR ROM
+ADDRESSES $F800-$FFFF (63488-65535) (-2048 TO -1)
+$F800....63488....CALL -2048.....Plots a point after column is set in Y register, row in accumulator, and color in zero-page address $30; destroys contents of accumulator
+$F819....63513....CALL -2023.....Plots a horizontal line to lo-res screen after setting row to the accumulator, right endpoint column to address $2C, left endpoint column to Y register, and color to $30; destroys contents of accumulator and Y register
+$F828....63528....CALL -2008.....Plots a vertical line to lo-res screen after setting column to Y register, upper endpoint row to the accumulator, bottom endpoint row to address $2D, and color to $30; destroys contents of accumulator
+$F832....63538....CALL -1998.....Clears entire lo-res graphics screen
+$F836....63542....CALL -1994.....Clears only graphics portion of lo-res graphics screen
+$F838....63544....CALL -1992.....Clears low-res screen from top to specified row after setting that row value in Y register
+$F83C....63548....CALL -1988.....Clears designated portion of upper left-hand corner of lo-res screen after setting right-end column to Y register and bottom-end row to address $2D
+$F847....63559....CALL -1977.....Computes address for current lo-res row value stored in the A register
+$F85F....63583....CALL -1953.....Adds 3 to current COLOR
+$F864....63588....CALL -1948.....Sets lo-res color to the value in the accumulator
+$F871....63601....CALL -1935.....Returns color code of specified lo-res graphics point; set column to X register and row to the accumulator; after CALLing, the color code will be in the accumulator
+$F940....63808....CALL -1728.....Prints current contents of the Y and X registers in hexadecimal
+$F941....63809....CALL -1727.....Prints current contents of the A and X registers in hexadecimal
+$F944....63812....CALL -1724.....Prints current contents of X register in hexadecimal
+$F948....63816....CALL -1720.....Prints three successive blanks on the current text screen
+$F94C....63820....CALL -1716.....Prints number of successive blanks specified in X register
+$FA62....64098....CALL -1438.....Pseudo-resets
+$FAA6....64166....CALL -1370.....Re-boots
+$FAD7....64215....CALL -1321.....Displays all registers
+$FB1E....64286....CALL -1250.....Reads value from game paddle specified in X register; after CALL, value will be in Y register
+$FB2F....64303....CALL -1233.....Clears text or low-res graphics screen
+$FB40....64320....CALL -1216.....Sets the screen to lo-res graphics mode; destroys contents of the accumulator
+$FB4B....64331....CALL -1205.....Sets the normal, 4-line text window
+$FB60....64352....CALL -1184.....Clears screen and ?"Apple..."
+$FB6F....64367....CALL -1169.....Used to calculate address 1012 ($3F4) for the <Control-Reset> vector
+$FBC1....64449....CALL -1087.....Calculates base address of current text cursor postion
+$FBE4....64484....CALL -1052.....Rings bell (some equivalents to CALL -1052 are: <Control-G>, ? CHR$(7), ? CHR$(135), or CALL -198)
+$FBF4....64500....CALL -1036.....Moves cursor right
+$FC10....64528....CALL -1008.....Moves cursor left
+$FC1A....64538....CALL -998......Moves cursor up
+$FC22....64546....CALL -990......Tabs cursor vertically to row specified in the accumulator
+$FC2C....64556....CALL -980......Performs an ESCape function
+$FC42....64578....CALL -958......Clears text from cursor to bottom of screen (including text on same line as cursor) (same as <ESC> <F>)
+$FC58....64600....CALL -936......Clears TEXT screen and HOMEs the cursor (equivalent of <ESC> <@>); destroys contents of accumulator and Y register
+$FC62....64610....CALL -926......Performs a carriage return
+$FC66....64614....CALL -922......Moves cursor down
+$FC70....64624....CALL -912......Scrolls current text screen up one row; destroys contents of accumulator and Y register
+$FC9C....64668....CALL -868......Clears text line from cursor to right (same as <ESC> <E>)
+$FCA8....64680....CALL -856......WAITs; executes time delay; set delay value (dly) to the accumulator (address 69 or $45) before CALLing; the delay time (in seconds) can be found using this equation: delay=(0.5*(5*(dly*dly)+27*dly+26))/10000
+$FCC9....64713....CALL -823......Writes leader tone to cassette recorder
+$FD0C....64780....CALL -756......Waits for any keypress; destroys contents of accumulator and Y register
+$FD1B....64795....CALL -741......Waits for a keypress and stores its ASCII code in the accumulator; also cycles random-number seed generator
+$FD35....64821....CALL -715......Fetches keystoke and stores its value in the the accumulator
+$FD5A....64858....CALL -678......Waits for a <Return> keypress
+$FD5C....64860....CALL -676......Rings bell and waits for a <Return> keypress
+$FD67....64871....CALL -665......Issues a line feed, waits for a line of data ending with a <Return> keypress, stores the data in the keyboard input buffer, stores length of line in Y register, and uses the CHR$ of the number stored at address 51 for a cursor (cursor symbol can be altered)
+$FD6A....64874....CALL -662......Same as CALL -665, but does not execute a line feed
+$FD6F....64879....CALL -657......Better input; commas/colons O.K.; this example loads the variable A$ with what was put into the Keyboard Input Buffer by the CALL -657:
+                                    10 PRINT "ENTER YOUR NAME (LAST,FIRST):";: CALL -657
+                                    20 A$="": FOR I=512 TO 767: IF PEEK(I) <> 141 THEN A$=A$+CHR$(PEEK(I)-128):NEXT I
+$FD75....64885....CALL -651......Same as CALL -662, but does not print prompt character; CALL after setting X register to 0
+$FD8E....64910....CALL -626......Performs a carriage return
+$FDA3....64931....CALL -605......Prints hexadecimal of eight consecutive memory locations, beginning from specified LSB at address 60 and specified MSB at address 61; CALL after setting Y register to 0
+$FDB3....64947....CALL -589......Prints range of hexadecimal data for the address specified in memory locations $3C and $3D (LSB and MSB, respectively) through address specified in memory locations $3E and $3F; CALL after setting Y register to 0
+$FDDA....64986....CALL -550......Prints the current content of the accumulator in hexadecimal
+$FDE3....64995....CALL -541......Prints lower four bits (nibble) of the accumulator
+$FDED....65005....CALL -531......Prints current ASCII character in the accumulator
+$FDF0....65008....CALL -528......Same as CALL -531, except CALL -528 also advances cursor to next column position
+$FE2C....65068....CALL -468......Memory move; to execute a BASIC memory move, type this in (where OS and OE are the Old-location Start and End, and NS is the New Start) and GOSUB 5000 to execute it:
+                                    5000 N=OS: LOC=60: GOSUB 5020: N=OE: LOC=62: GOSUB 5020: N=NS: LOC=66: GOSUB 5020
+                                    5010 POKE 768,160: POKE 769,0: POKE 770,76: POKE 771,44: POKE 772,254: CALL 768: RETURN
+                                    5020 POKE LOC,N-INT(N/256)*256: POKE LOC+1,INT(N/256): RETURN
+$FE5E....65118....CALL -418......Disassembles 20 instructions
+$FE61....65121....CALL -415......Disassembler; POKE start address at locations 58-59 before CALL
+$FE80....65152....CALL -384......INVERSE
+$FE84....65156....CALL -380......NORMAL
+$FE86....65158....CALL -378......Sets I flag
+$FE89....65161....CALL -375......Sets keyboard
+$FEB0....65200....CALL -336......Jumps to BASIC
+$FEB3....65203....CALL -333......Continues BASIC
+$FEB6....65206....CALL -330......Memory location "Go"
+$FEBF....65215....CALL -321......Displays A, X, Y, P, and S registers
+$FEC2....65218....CALL -318......Performs monitor trace
+$FECD....65229....CALL -307......Writes to tape
+$FEFD....65277....CALL -259......Reads from tape
+$FF2D....65325....CALL -211......Rings bell and ?"ERR"; destroys contents of accumulator and Y register
+$FF3A....65338....CALL -198......Rings bell without printing a control character
+$FF3F....65343....CALL -193......Monitor "RESTORE"
+$FF44....65348....CALL -188......Monitor "RESTR1"
+$FF4A....65354....CALL -182......Monitor "SAVE"
+$FF4C....65356....CALL -180......Monitor "SAV1"
+$FF59....65369....CALL -167......Enters monitor
+$FF69....65381....CALL -155......Enters monitor with bell
+$FF69....65385....CALL -151......Enters monitor (<Control-C>, <Return> leaves the monitor)
+$FF70....65392....CALL -144......Scans input buffer; here is an example of how it executes a machine language routine (not subroutine) from BASIC:
+                                    100 A$="300: A9 C1 20 ED FD 18 69 01 C9 DB D0 F6 60 300G D823G"
+                                    110 FOR X=1 TO LEN(A$): POKE 511+X,ASC(MID$(A$,X,1))+128: NEXT
+                                    120 POKE 72,0: CALL -144
