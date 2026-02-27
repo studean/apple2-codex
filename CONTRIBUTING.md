@@ -1,4 +1,4 @@
-# Contributing to the Apple II Codex
+# Contributing to the Open Apple II Orchard
 
 Thank you for contributing! This project converts vintage Apple II reference 
 material into structured formats suitable for RAG systems and LLM training.
