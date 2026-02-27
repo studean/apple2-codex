@@ -78,9 +78,9 @@ For **single addresses**, omit the `_end` fields entirely — do not null them o
 ### `basic_variant`
 | Value | Meaning |
 |---|---|
-| `"applesoft"` | Applesoft BASIC only (marked `*` in source) |
-| `"integer"` | Integer BASIC only (marked `**` in source) |
-| `"both"` | Works in both (no asterisk in source) |
+| `"applesoft"` | Applesoft BASIC only |
+| `"integer"` | Integer BASIC only |
+| `"both"` | Works in both |
 
 ### `category`
 Use one of the established categories. Add to this list via a PR if genuinely 
